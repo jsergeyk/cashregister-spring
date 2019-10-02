@@ -8,4 +8,4 @@
 
 _____
 
-Скрипт БД: WebContent/WEB-INF/sql/create_db.sql
+Скрипт БД: src/main/resources/create_db_spring.sql
