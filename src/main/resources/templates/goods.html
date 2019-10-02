@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
+<head th:fragment="header">
+    <title th:text='#{title}'></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div th:include="header"></div>
+	<div><p th:text="#{title} + '. ' + #{goods.title}"></p></div>
+	<div th:if="${session.user != null and session.user.userType.type == 'goods_spec'}">
+		<FORM method="POST" >
+		  <div class="form-group row">
+		    <label class="col-sm-2 col-form-label" th:text="#{check.goodname}"></label>
+		    <div class="col-sm-10">
+		      <input name="name" type="text" size="45" required>
+		    </div>
+		  </div>
+		  
+		  <div class="form-group row">
+		    <label class="col-sm-2 col-form-label" th:text="#{check.code}"></label>
+		    <div class="col-sm-10">
+		      <input name="code" type="text" size="45" required>
+		    </div>
+		  </div>
+		  
+		  <div class="form-group row">
+		    <label class="col-sm-2 col-form-label" th:text="#{check.quant}"></label>
+		    <div class="col-sm-10">
+		      <input name="quant" type="number" value="0" min="0" step="0.1" required>
+		    </div>
+		  </div>
+		  
+		  <div class="form-group row">
+		    <label class="col-sm-2 col-form-label" th:text="#{check.price}"></label>
+		    <div class="col-sm-10">
+		      <input name="price" type="number" value="0" min="0" step="0.01" required>
+		    </div>
+		  </div>
+		  
+		  <div class="form-group row">
+		    <label class="col-sm-2 col-form-label" th:text="#{goods.measure}"></label>
+		    <div class="col-sm-10">
+		      	<select class="selectpicker" name="measure" size="1">
+	  				<option value="кг" th:text="#{goods.kilo}"/>
+	  				<option value="шт" th:text="#{goods.pc}"/>
+				</select>
+		    </div>
+		  </div>
+		  <button type="submit" class="button" name="btnSaveGood" th:text="#{goods.add}"></button>		
+		</FORM>
+		
+		<FORM method="POST">
+			<h4 th:text="#{goods.change}">:</h4>
+			  <div class="form-group row">
+			    <label class="col-sm-2 col-form-label" th:text="#{check.code}"></label>
+			    <div class="col-sm-10">
+			      <input name="code" type="text" size="45" required>
+			    </div>
+			  </div>
+			  
+			  <div class="form-group row">
+			    <label class="col-sm-2 col-form-label" th:text="#{check.quant}"></label>
+			    <div class="col-sm-10">
+			      <input name="quant" type="number" value="0" min="0" step="0.1" required>
+			    </div>
+			  </div>
+			  
+			  <div class="form-group row">
+			    <label class="col-sm-2 col-form-label" th:text="#{check.price}"></label>
+			    <div class="col-sm-10">
+			      <input name="price" type="number" value="0" min="0" step="0.01" required>
+			    </div>
+			  </div>
+			  <button type="submit" class="button" name="btnChangeGoods" th:text="#{goods.change}"></button>
+		</FORM>
+		<table class="table table-sm">
+			<thead class="thead-dark">
+			<tr>
+				<th th:text="#{check.goodname}"></th>
+				<th th:text="#{check.code}"></th>
+				<th th:text="#{check.quant}"></th>
+				<th th:text="#{check.quant}"></th>
+				<th th:text="#{check.price}"></th>
+				<th th:text="#{goods.measure}"></th>
+				<th th:text="#{goods.comments}"></th>
+			</tr>
+			</thead>
+			<tr th:each="product : ${viewGoods}">
+				<td th:text ="${product.name}"></td>
+				<td th:text ="${product.code}"></td>
+				<td th:text ="${product.quant}"></td>
+				<td th:text ="${product.price}"></td>
+				<td th:text ="${product.measure}"></td>
+				<td th:text ="${product.comments}"></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

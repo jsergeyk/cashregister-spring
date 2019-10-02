@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"  th:with="lang=${#locale.language}" th:lang="${lang}">
+<head th:fragment="header">
+   <title th:text='#{title}'></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/style.css}"    href="/css/style.css"/>
+</head>
+<body>
+	<div th:include="header"></div>
+    <p th:text="'Hello, ' + ${name} + '!'" />
+    <ul>
+	    <li th:each="check : ${checks}" th:text="${check.goodname}"></li>
+	</ul>
+</body>
+</html>
