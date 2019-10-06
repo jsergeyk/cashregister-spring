@@ -52,7 +52,7 @@ public class Chec implements Serializable {
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
-    @Column(name = "crtime")
+    @Column(name = "crtime", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     private Date crtime;
     @Basic(optional = false)
@@ -66,7 +66,7 @@ public class Chec implements Serializable {
     private boolean canceled;
     @Column(name = "registration")
     private Integer registration;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCheck")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "check")
     private Collection<Checkspec> checkspecCollection;
     @JoinColumn(name = "creator", referencedColumnName = "id")
     @ManyToOne(optional = false)

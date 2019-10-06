@@ -31,4 +31,9 @@ public class CheckspecImpl implements ICheckspec {
     public Checkspec save(Checkspec checkspec) {
         return checkspecRepository.save(checkspec);
     }
+
+	@Override
+	public void saveAll(Iterable<Checkspec> entities) {
+		checkspecRepository.saveAll(entities);		
+	}
 }

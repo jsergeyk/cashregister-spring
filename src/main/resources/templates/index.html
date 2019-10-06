@@ -16,11 +16,11 @@
  -->	
  <div><p th:text="#{title} + '. ' + #{index.welcome}"></p></div>
 	<div th:if="${session.userNotExists}">		   
-      <p th:text="#{index.nouser}">		   
+      <p class="h4" th:text="#{index.nouser}">		   
    </div>
-   <div th:if="${userNotExists != null}">
-		<p th:text="#{index.nouser}"> </p>
-	</div>
+   <!-- <div th:if="${userNotExists != null}">
+		<p class="h4" th:text="#{index.nouser}"> </p>
+	</div> -->
 	<div th:if="${session.user == null}">
 		<FORM method="POST">
 			<table style="margin: auto">

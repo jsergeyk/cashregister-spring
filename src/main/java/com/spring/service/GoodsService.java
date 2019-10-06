@@ -15,7 +15,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class GoodsService {
 
-	private final IGoods goodsDAO;    
+	private final IGoods goodsDAO;
 
     public Optional<Goods> findByCode(int code) {
         return goodsDAO.findByCode(code);
@@ -27,12 +27,12 @@ public class GoodsService {
 
     /**
      * 
-     * @param page отображаемая страница
-     * @param recordsPerPage кол-во записей на страницу
+     * @param currentPage отображаемая страница
+     * @param pageSize кол-во записей на страницу
      * @return Page<Goods> страница
      */
-    public Page<Goods> view(int page, int recordsPerPage) {
-    	PageRequest sortedByCode = PageRequest.of(page, recordsPerPage, Sort.by("code"));
+    public Page<Goods> view(int currentPage, int pageSize) {
+    	PageRequest sortedByCode = PageRequest.of(currentPage - 1, pageSize, Sort.by("code"));
     	return goodsDAO.findAll(sortedByCode);
 	}
     
@@ -40,4 +40,57 @@ public class GoodsService {
     	goodsDAO.save(goods);
     }
 
+	/**
+	 * Добавить товар в базу данных (если товара нет в наличии)
+	 * @param code код товара
+	 * @param name наименование
+	 * @param quant количество товара
+	 * @param price цена товара
+	 * @param measure единица измерения
+	 * @param comments комментарии к товару
+	 * @return Id добавленно записи
+	 */
+	public Long addGoods(Integer code, String name, Double quant, Double price, String measure, String comments) {
+		Goods goods = new Goods();
+		goods.setCode(code);
+		goods.setName(name);
+		goods.setQuant(quant);
+		goods.setPrice(price);
+		goods.setMeasure(measure);
+		goods.setComments(comments);
+		Optional<Goods> existsGood = goodsDAO.findByCode(code);
+		if (existsGood.isPresent()) {
+			//logger.info("Товар с кодом " + code + " уже существует");
+			return -1L;
+		} else {
+			existsGood = goodsDAO.findByName(name);		
+			if (existsGood.isPresent()) {
+				//logger.info("Товар " + name + " уже существует");
+				return -2L;
+			} else {
+				//logger.info("Товар добавлен");
+				goodsDAO.save(goods);
+				return goods.getId();
+			}
+		}
+	}
+
+	/**
+	 * Изменить товар по коду товара
+	 * @param changecode код товара
+	 * @param changequant количество
+	 * @param changeprice цена
+	 */
+	public void changeGoods(Integer code, Double newQuant, Double newPrice) {
+		Optional<Goods> goods = goodsDAO.findByCode(code);
+		if (goods.isPresent()) {
+			if (newQuant != null) {
+				goods.get().setQuant(newQuant);
+			}
+			if (newPrice != null) {
+				goods.get().setPrice(newPrice);
+			}
+			goodsDAO.save(goods.get());
+		}		
+	}
 }

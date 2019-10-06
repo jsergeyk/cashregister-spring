@@ -35,6 +35,11 @@ public class GoodsImpl implements IGoods {
         return goodsRepository.findById(id);
     }
 
+	@Override
+	public Optional<Goods> findByName(String name) {
+		return goodsRepository.findByName(name);
+	}
+	
     @Override
     public Goods save(Goods goods) {
         return goodsRepository.save(goods);
@@ -48,5 +53,11 @@ public class GoodsImpl implements IGoods {
 	@Override
 	public Page<Goods> findAll(Pageable p) {
 		return goodsRepository.findAll(p);
+	}
+
+	@Override
+	public Integer reduceQuant(Long id, double quant) {
+		return goodsRepository.reduceQuant(id, quant);
+		
 	}
 }

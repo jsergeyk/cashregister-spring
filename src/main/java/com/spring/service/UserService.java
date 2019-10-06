@@ -14,7 +14,7 @@ import java.util.List;
 public class UserService {
 
 	private final IUser userDAO;
-    private final IUserType iUserType;    
+    private final IUserType userTypeDAO;    
 
     public User findByLoginAndPassword(String login, String password) {
         return userDAO.findByLoginAndPassword(login, password);
@@ -29,7 +29,7 @@ public class UserService {
     }
 
     public void save(User user, UserType userType) {
-    	UserType savedUserType = iUserType.save(userType);
+    	UserType savedUserType = userTypeDAO.save(userType);
     	user.setUserType(savedUserType);
         //User savedUser = userDAO.save(user);
     }

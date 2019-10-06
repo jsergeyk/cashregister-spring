@@ -13,7 +13,11 @@ public interface IGoods {
     List<Goods> findAllGoods();
     Optional<Goods> findByCode(int code);
     Optional<Goods> findById(Long id);
-
+	/**
+	 * @param name
+	 * @return
+	 */
+	Optional<Goods> findByName(String name);
     Goods save(Goods goods);
     
 	/**
@@ -26,5 +30,9 @@ public interface IGoods {
 	 * @return
 	 */
 	Page<Goods> findAll(Pageable p);
-
+	/**
+	 * @param id
+	 * @param quant
+	 */
+	Integer reduceQuant(Long id, double quant);
 }

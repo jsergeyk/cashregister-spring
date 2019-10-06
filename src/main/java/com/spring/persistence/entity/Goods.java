@@ -60,7 +60,7 @@ public class Goods implements Serializable {
     private String measure;
     @Column(name = "comments")
     private String comments;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idGood")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "goods")
     private Collection<Checkspec> checkspecCollection;
 
     public Goods() {

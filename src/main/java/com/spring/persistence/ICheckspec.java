@@ -12,4 +12,9 @@ public interface ICheckspec {
     Optional<Checkspec> findById(Long id);
 
     Checkspec save(Checkspec check);
+
+	/**
+	 * @param checkspecs
+	 */
+	void saveAll(Iterable<Checkspec> entities);
 }

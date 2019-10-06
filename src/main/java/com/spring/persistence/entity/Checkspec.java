@@ -62,10 +62,10 @@ public class Checkspec implements Serializable {
     private boolean canceled;
     @JoinColumn(name = "id_check", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Chec idCheck;
+    private Chec check;
     @JoinColumn(name = "id_good", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Goods idGood;
+    private Goods goods;
 
     public Checkspec() {
     }
@@ -74,14 +74,14 @@ public class Checkspec implements Serializable {
         this.id = id;
     }
 
-    public Checkspec(Long id, double quant, double price, double total, double ndstotal, boolean canceled, Goods idGood) {
+    public Checkspec(Long id, double quant, double price, double total, double ndstotal, boolean canceled, Goods goods) {
         this.id = id;
         this.quant = quant;
         this.price = price;
         this.total = total;
         this.ndstotal = ndstotal;
         this.canceled = canceled;
-        this.idGood = idGood;
+        this.goods = goods;
     }
 
     public Long getId() {
@@ -140,20 +140,20 @@ public class Checkspec implements Serializable {
         this.canceled = canceled;
     }
 
-    public Chec getIdCheck() {
-        return idCheck;
+    public Chec getCheck() {
+        return check;
     }
 
-    public void setIdCheck(Chec idCheck) {
-        this.idCheck = idCheck;
+    public void setCheck(Chec check) {
+        this.check = check;
     }
 
-    public Goods getIdGood() {
-        return idGood;
+    public Goods getGoods() {
+        return goods;
     }
 
-    public void setIdGood(Goods idGood) {
-        this.idGood = idGood;
+    public void setGoods(Goods goods) {
+        this.goods = goods;
     }
 
     @Override

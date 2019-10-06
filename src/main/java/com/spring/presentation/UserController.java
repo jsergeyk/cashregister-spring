@@ -5,6 +5,7 @@ import com.spring.service.UserService;
 
 import lombok.AllArgsConstructor;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,15 @@ public class UserController {
     @GetMapping("/")
     public String getSignIn() {
         return "/index";
+    }
+    
+    @GetMapping("/logout")
+    public ModelAndView logout(HttpServletRequest request/*, HttpServletResponse response*/) {
+    	HttpSession session = request.getSession(false);
+        if (session != null) {
+        	session.invalidate();
+        }
+        return new ModelAndView("redirect:/");
     }
     
     @PostMapping("/")
@@ -45,11 +55,9 @@ public class UserController {
         	session.setAttribute("user", null);
 			session.setAttribute("userNotExists", true);			
 		}
-        model.addAttribute("user", user);	
-        //throw new RuntimeException("Wrong User");
+        model.addAttribute("user", user);
         return new ModelAndView("redirect:/");
-    }
-     //return new ModelAndView("redirect:/tickets/" + ticket.getId());    
+    }   
     
   /*    
     @Bean

@@ -27,14 +27,14 @@ DROP TABLE IF EXISTS `chec`;
 CREATE TABLE `chec` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `canceled` bit(1) NOT NULL,
-  `crtime` datetime NOT NULL,
+  `crtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `discount` double NOT NULL,
   `registration` int(11) DEFAULT NULL,
   `total` double NOT NULL,
   `creator` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK85q06l8gxj53wli4a47kdgqw0` (`creator`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,6 +43,7 @@ CREATE TABLE `chec` (
 
 LOCK TABLES `chec` WRITE;
 /*!40000 ALTER TABLE `chec` DISABLE KEYS */;
+INSERT INTO `chec` VALUES (14,_binary '\0','2019-10-06 00:01:02',0,NULL,10,2),(13,_binary '\0','2019-10-05 23:59:02',0,NULL,5,2),(12,_binary '\0','2019-10-05 23:52:33',0,NULL,24.6,2),(11,_binary '\0','2019-10-05 23:48:43',0,NULL,24.6,2),(10,_binary '\0','2019-10-05 23:41:32',0,NULL,40,2),(9,_binary '\0','2019-10-05 23:35:42',0,NULL,25,2),(8,_binary '\0','2019-10-05 23:33:56',0,NULL,25,2),(15,_binary '\0','2019-10-06 00:12:34',0,NULL,30,2),(16,_binary '\0','2019-10-06 00:13:21',0,NULL,5,2),(17,_binary '\0','2019-10-06 00:14:25',0,NULL,5,2),(18,_binary '\0','2019-10-06 00:15:19',0,NULL,5,2),(19,_binary '\0','2019-10-06 00:16:30',0,NULL,15,2),(20,_binary '\0','2019-10-06 00:44:28',0,NULL,30,2),(21,_binary '\0','2019-10-06 00:49:56',0,NULL,30,2);
 /*!40000 ALTER TABLE `chec` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -66,7 +67,7 @@ CREATE TABLE `checkspec` (
   PRIMARY KEY (`id`),
   KEY `FKps13kyji4j7vtfu5w4xgcriyw` (`id_check`),
   KEY `FKg6t1wt00bwllh571fm23lm1j` (`id_good`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,6 +76,7 @@ CREATE TABLE `checkspec` (
 
 LOCK TABLES `checkspec` WRITE;
 /*!40000 ALTER TABLE `checkspec` DISABLE KEYS */;
+INSERT INTO `checkspec` VALUES (12,_binary '\0',20,2,5,2,10,14,6),(11,_binary '\0',20,3.92,9.8,2,19.6,12,7),(10,_binary '\0',20,1,5,1,5,12,6),(9,_binary '\0',20,3,5,3,15,10,6),(8,_binary '\0',20,2,5,2,10,9,6),(7,_binary '\0',20,3,5,3,15,9,6),(13,_binary '\0',20,1,5,1,5,15,6),(14,_binary '\0',20,2,5,2,10,15,6),(15,_binary '\0',20,3,5,3,15,15,6),(16,_binary '\0',20,1,5,1,5,16,6),(17,_binary '\0',20,1,5,1,5,17,6),(18,_binary '\0',20,1,5,1,5,18,6),(19,_binary '\0',20,1,5,1,5,19,6),(20,_binary '\0',20,2,5,2,10,19,6),(21,_binary '\0',20,1,5,1,5,20,6),(22,_binary '\0',20,2,5,2,10,20,6),(23,_binary '\0',20,3,5,3,15,20,6),(24,_binary '\0',20,1,5,1,5,21,6),(25,_binary '\0',20,2,5,2,10,21,6),(26,_binary '\0',20,3,5,3,15,21,6);
 /*!40000 ALTER TABLE `checkspec` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,9 +116,10 @@ CREATE TABLE `goods` (
   `comments` varchar(255) DEFAULT NULL,
   `measure` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `price` double NOT NULL,
   `quant` double NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,6 +128,7 @@ CREATE TABLE `goods` (
 
 LOCK TABLES `goods` WRITE;
 /*!40000 ALTER TABLE `goods` DISABLE KEYS */;
+INSERT INTO `goods` VALUES (2,33,'прим','кг','Лук белый',19.5,7),(3,20,'','кг','Петрушка',16,20),(4,12,'','кг','Сливы',20,50),(5,34,'','кг','Редис',41,100),(6,1,'','кг','Буряк',5,89),(7,2,'','кг','Морковь',9.8,174),(9,3,NULL,'кг','Огурцы',18,170),(10,4,NULL,'кг','Картошка',13,120),(11,5,NULL,'кг','Лук репчатый',8,110),(12,6,NULL,'кг','Чеснок',65,100),(13,7,NULL,'кг','Бананы',22,70),(14,8,NULL,'кг','Капуста цветная',25.6,240),(15,9,NULL,'кг','Капуста ранняя',12,240),(16,10,NULL,'кг','Капуста пекинская',21,80),(17,11,NULL,'кг','Дыня',5.2,135),(18,13,NULL,'кг','Арбуз',6,135),(19,14,NULL,'кг','Персик',28,135),(20,15,NULL,'кг','Киви',90,110),(21,16,NULL,'кг','Авокадо',31,75),(22,17,NULL,'кг','Ананас',25,90),(23,19,NULL,'кг','Укроп',15,10),(25,18,NULL,'кг','Горох',11,10),(26,21,NULL,'кг','Фасоль',12,10),(27,22,NULL,'кг','Персики',30,9),(28,23,NULL,'кг','Лук зеленый',63,15),(29,24,NULL,'кг','Апельсины',33,15),(30,25,NULL,'кг','Мандарины',35,15),(31,26,NULL,'кг','Кабачок',12,12),(33,27,NULL,'кг','Тыква',24.8,15),(34,35,NULL,'кг','Груши',23,15),(35,36,NULL,'кг','Яблоки',17.5,30),(36,37,NULL,'шт','Инжир',10,13),(58,38,'','шт','Инжир сушеный',16,45);
 /*!40000 ALTER TABLE `goods` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +147,7 @@ CREATE TABLE `user` (
   `id_user_type` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FKm3y953fsjasj6ev13yabo5skm` (`id_user_type`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,6 +156,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'a1@gmail.com','Сергей','1',4),(2,'a2@gmail.com','Александр','2',3),(16,'a3@gmail.com','Николай','3',2);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,7 +172,7 @@ CREATE TABLE `user_type` (
   `description` varchar(255) DEFAULT NULL,
   `type` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -176,6 +181,7 @@ CREATE TABLE `user_type` (
 
 LOCK TABLES `user_type` WRITE;
 /*!40000 ALTER TABLE `user_type` DISABLE KEYS */;
+INSERT INTO `user_type` VALUES (4,'Товаровед','goods_spec'),(3,'Кассир','cashier'),(2,'Старший кассир','senior_cashier'),(1,'Администратор','admin');
 /*!40000 ALTER TABLE `user_type` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -188,4 +194,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-23  1:20:01
+-- Dump completed on 2019-10-06  4:24:53
