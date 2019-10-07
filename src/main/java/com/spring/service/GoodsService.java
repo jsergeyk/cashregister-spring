@@ -3,6 +3,7 @@ package com.spring.service;
 import com.spring.persistence.IGoods;
 import com.spring.persistence.entity.Goods;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@Slf4j
 @AllArgsConstructor
 public class GoodsService {
 
@@ -60,15 +62,15 @@ public class GoodsService {
 		goods.setComments(comments);
 		Optional<Goods> existsGood = goodsDAO.findByCode(code);
 		if (existsGood.isPresent()) {
-			//logger.info("Товар с кодом " + code + " уже существует");
+			log.info("Товар с кодом " + code + " уже существует");
 			return -1L;
 		} else {
 			existsGood = goodsDAO.findByName(name);		
 			if (existsGood.isPresent()) {
-				//logger.info("Товар " + name + " уже существует");
+				log.info("Товар " + name + " уже существует");
 				return -2L;
 			} else {
-				//logger.info("Товар добавлен");
+				log.info("Товар добавлен");
 				goodsDAO.save(goods);
 				return goods.getId();
 			}

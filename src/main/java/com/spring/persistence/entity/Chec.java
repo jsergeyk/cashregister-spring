@@ -62,8 +62,8 @@ public class Chec implements Serializable {
     @Column(name = "discount")
     private double discount;
     @Basic(optional = false)
-    @Column(name = "canceled")
-    private boolean canceled;
+    @Column(name = "canceled", columnDefinition = "integer default 0")
+    private Integer canceled;
     @Column(name = "registration")
     private Integer registration;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "check")
@@ -79,7 +79,7 @@ public class Chec implements Serializable {
         this.id = id;
     }
 
-    public Chec(Long id, Date crtime, double total, double discount, boolean canceled, User creator) {
+    public Chec(Long id, Date crtime, double total, double discount, Integer canceled, User creator) {
         this.id = id;
         this.crtime = crtime;
         this.total = total;
@@ -120,11 +120,11 @@ public class Chec implements Serializable {
         this.discount = discount;
     }
 
-    public boolean getCanceled() {
+    public Integer getCanceled() {
         return canceled;
     }
 
-    public void setCanceled(boolean canceled) {
+    public void setCanceled(Integer canceled) {
         this.canceled = canceled;
     }
 

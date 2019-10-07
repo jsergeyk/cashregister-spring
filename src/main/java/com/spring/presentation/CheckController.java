@@ -1,20 +1,16 @@
 package com.spring.presentation;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.persistence.entity.Checkspec;
@@ -23,7 +19,7 @@ import com.spring.service.CheckService;
 
 
 @Controller
-//@RequestMapping("/check")
+@Slf4j
 @AllArgsConstructor
 public class CheckController {
     
@@ -82,7 +78,7 @@ public class CheckController {
 			} catch (/*Transaction*/Exception e) {
 				request.setAttribute("addedCheck", false);
 				checkspecs.clear();
-				//logger.error("Ошибка транзакции при добавлении чека и спецификаций. ", e);
+				log.error("Ошибка транзакции при добавлении чека и спецификаций. ", e);
 			}
     	}
     	return "/check";    	
@@ -102,9 +98,9 @@ public class CheckController {
     }
     
     /**
-     * Удалить выбранную спецификацию 
-     * @param session
-     * @param count
+     * Удалить выбранную спецификацию чека
+     * @param session сессия
+     * @param count № п/п спецификация чека
      * @return
      */
     @GetMapping("/check/del/{count}")

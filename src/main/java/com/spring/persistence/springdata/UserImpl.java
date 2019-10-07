@@ -42,4 +42,9 @@ public class UserImpl implements IUser {
 	public User findByLoginAndPassword(String login, String password) {
 		return userRepository.findByLoginAndPassword(login, password);
 	}
+
+	@Override
+	public User findByLogin(String login) {
+		return userRepository.findByLogin(login);
+	}
 }

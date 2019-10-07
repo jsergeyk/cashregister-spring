@@ -28,6 +28,11 @@ public class UserTypeImpl implements IUserType {
         return userTypeRepository.findById(id);
     }
 
+	@Override
+	public Optional<UserType> findByType(String type) {
+		return userTypeRepository.findByType(type);
+	}
+	
     @Override
     public UserType save(UserType userType) {
         return userTypeRepository.save(userType);

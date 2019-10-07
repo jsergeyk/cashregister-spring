@@ -4,40 +4,31 @@
     <title th:text='#{title}'></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" th:href="@{/css/style.css}"    href="/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
 </head>
 <body>
 	<div th:include="header"></div>
-
-<!-- 
-<tr th:each="student: ${students}">
-    <td th:text="${student.id}"/>
-    <td th:text="${student.name}"/>
-</tr>
- -->	
- <div><p th:text="#{title} + '. ' + #{index.welcome}"></p></div>
+ 	<div><p th:text="#{title} + '. ' + #{index.welcome}"></p></div>
 	<div th:if="${session.userNotExists}">		   
       <p class="h4" th:text="#{index.nouser}">		   
-   </div>
-   <!-- <div th:if="${userNotExists != null}">
-		<p class="h4" th:text="#{index.nouser}"> </p>
-	</div> -->
+    </div>
 	<div th:if="${session.user == null}">
-		<FORM method="POST">
-			<table style="margin: auto">
-				<tr>
-					<td style="text-align: left">E-mail:</td>
-					<td><input name="email" type="email" size="35" placeholder="E-mail" autocomplete="on" autofocus required /></td>
-				</tr>
-				<tr>
-					<td style="text-align: left"><p th:text="#{registration.password}"></p></td>
-					<td><input name="password" type="password" placeholder="Пароль" size="35" maxlength="35" required /></td>
-				</tr>
-				<tr>
-					<td><input type="submit" class="button" name="btnLogin" value=Войти /></td>					
-				</tr>
-			</table>
+		<FORM class="px-4 py-3" method="POST">
+			<div class="form-group row">
+			    <label class="col-sm-2 col-form-label">E-mail:</label>
+			    <div class="col-sm-10">
+			      <input name="email" type="email" size="35" placeholder="E-mail" autocomplete="on" autofocus required>
+				</div>
+			 </div>
+			 <div class="form-group row">
+			    <label class="col-sm-2 col-form-label" th:text="#{registration.password}"></label>
+			    <div class="col-sm-10">
+			      <input name="password" type="password" placeholder="Пароль" size="35" maxlength="35" required>
+				</div>
+			 </div>
+			 <button type="submit" class="btn btn-primary" name="btnLogin" th:text="#{menu.enter}"></button>
+			 <div><a href="registration" th:text="#{registration}"></a></div>
 		</FORM>
-		<div align="center"><a href="registration" th:text="#{registration}"></a></div>
 	</div>
 </body>
 </html>

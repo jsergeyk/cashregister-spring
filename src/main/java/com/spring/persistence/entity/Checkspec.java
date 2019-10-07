@@ -58,8 +58,8 @@ public class Checkspec implements Serializable {
     @Column(name = "ndstotal")
     private double ndstotal;
     @Basic(optional = false)
-    @Column(name = "canceled")
-    private boolean canceled;
+    @Column(name = "canceled", columnDefinition = "integer default 0")
+    private Integer canceled;
     @JoinColumn(name = "id_check", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Chec check;
@@ -74,7 +74,7 @@ public class Checkspec implements Serializable {
         this.id = id;
     }
 
-    public Checkspec(Long id, double quant, double price, double total, double ndstotal, boolean canceled, Goods goods) {
+    public Checkspec(Long id, double quant, double price, double total, double ndstotal, Integer canceled, Goods goods) {
         this.id = id;
         this.quant = quant;
         this.price = price;
@@ -132,11 +132,11 @@ public class Checkspec implements Serializable {
         this.ndstotal = ndstotal;
     }
 
-    public boolean getCanceled() {
+    public Integer getCanceled() {
         return canceled;
     }
 
-    public void setCanceled(boolean canceled) {
+    public void setCanceled(Integer canceled) {
         this.canceled = canceled;
     }
 

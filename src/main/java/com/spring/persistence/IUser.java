@@ -18,6 +18,8 @@ public interface IUser {
 	 */
 	User findByLoginAndPassword(String login, String password);
 	
+	User findByLogin(String login);
+	
     Optional<User> findById(Long id);
 
     List<User> findByUserType(UserType userType);

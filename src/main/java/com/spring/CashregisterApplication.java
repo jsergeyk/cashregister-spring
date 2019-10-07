@@ -14,7 +14,7 @@ public class CashregisterApplication {
 		SpringApplication.run(CashregisterApplication.class, args);
 	}
     
-    @Bean	//Spring Boot будет искать файлы сообщений, содержащие ключи и значения интернационализации в папке src / main / resources
+    @Bean	//Spring Boot будет искать файлы сообщений, содержащие ключи и значения интернационализации в src / main / resources
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("classpath:/i18n/contentBundle");

@@ -1,23 +1,15 @@
 package com.spring.service;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.spring.persistence.IChec;
-import com.spring.persistence.ICheckspec;
-import com.spring.persistence.IGoods;
-import com.spring.persistence.entity.Chec;
-import com.spring.persistence.entity.Checkspec;
-import com.spring.persistence.entity.Goods;
-import com.spring.persistence.entity.User;
+import com.spring.persistence.*;
+import com.spring.persistence.entity.*;
 
 import lombok.AllArgsConstructor;
-
 
 /**
  * Класс сервиса для чеков
@@ -28,29 +20,14 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class CheckService {
 
-	//private final static Logger logger = LoggerFactory.getLogger(CheckService.class);
 	private final IChec checDAO;
 	private final ICheckspec checkspecDAO;
 	private final IGoods goodsDAO;
-	
-    @Transactional(readOnly = true)
-    public List<Chec> findAllChec() {
-        return checDAO.findAllChec();
-    }
-
-	/**
-     * @param page информация о пейджинации и сортировке
-     * @return модель и шаблон со списком заявок
-     */
-    @Transactional(readOnly = true)
-	public Object findAll(Pageable page) {
-        return checDAO.findAllChec();
-	}
 
 	/**
 	 * Сформировать спецификацию по найденному коду товара или наименованию товара 
-	 * @param xcode код товара
-	 * @param xname наименование товара
+	 * @param code код товара
+	 * @param name наименование товара
 	 * @param quant количество товара
 	 * @param nds ставка НДС
 	 * @return спецификация чека
@@ -66,8 +43,6 @@ public class CheckService {
 		if (existsGoods.isPresent()) {
 			Checkspec spec = new Checkspec();
 			spec.setGoods(existsGoods.get());
-			//spec.setname(existsGoods.get().getName());
-			//spec.setXcode(existsGoods.get().getCode());
 			spec.setQuant(quant);
 			spec.setPrice(existsGoods.get().getPrice());						
 			spec.setTotal(BigDecimal.valueOf(quant).multiply(BigDecimal.valueOf(spec.getPrice())).doubleValue());
@@ -100,5 +75,44 @@ public class CheckService {
 		});
 		checDAO.save(check);
 		checkspecDAO.saveAll(checkspecs);
+	}
+
+	/**
+	 * Найти чек по номеру
+	 * @param checkId номер чека
+	 * @return 
+	 */
+	@Transactional(readOnly = true)
+	public Optional<Chec> findById(Long checkId) {
+		return checDAO.findById(checkId);		
+	}
+
+	/**
+	 * Отменить спецификацию чека и пересчитать сумму чека
+	 * @param checkspec спецификация чека
+	 */
+	public void cancelCheckSpec(List<Checkspec> checkspecs, Integer count) {
+    	if (checkspecs != null && checkspecs.size() >= count && count > 0) {
+			Checkspec checkspec = checkspecs.get(count -1);
+			checkspec.setCanceled(1);
+			checkspecDAO.save(checkspec);
+			double total = checkspecs.stream()
+					.filter(spec -> spec.getCanceled() == 0)
+					.mapToDouble(o -> o.getTotal()).sum();
+			Chec check = checkspec.getCheck();
+			check.setTotal(total);
+			checDAO.save(check);
+    	}
+	}
+
+	/**
+	 * Отменить чек
+	 * @param check чек
+	 */
+	public void cancelCheckSpec(Chec check) {
+		if (check != null) {
+			check.setCanceled(1);
+			checDAO.save(check);
+		}
 	}
 }

@@ -4,6 +4,7 @@ import com.spring.persistence.entity.User;
 import com.spring.service.UserService;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-//@RequestMapping("/")
+@Slf4j
 @AllArgsConstructor
 public class UserController {
     
@@ -43,6 +44,7 @@ public class UserController {
         if (user != null) {
         	session.setAttribute("user", user);
         	session.setAttribute("userNotExists", null);
+        	log.info("Авторизация пользователя " + user.getName());
             String userType = user.getUserType().getType();
             if (userType.equalsIgnoreCase("goods_spec")) {				//товаровед
             	return new ModelAndView("redirect:/goods");

@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS `chec`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `chec` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `canceled` bit(1) NOT NULL,
+  `canceled` tinyint(1) NOT NULL DEFAULT '0',
   `crtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `discount` double NOT NULL,
   `registration` int(11) DEFAULT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE `chec` (
 
 LOCK TABLES `chec` WRITE;
 /*!40000 ALTER TABLE `chec` DISABLE KEYS */;
-INSERT INTO `chec` VALUES (14,_binary '\0','2019-10-06 00:01:02',0,NULL,10,2),(13,_binary '\0','2019-10-05 23:59:02',0,NULL,5,2),(12,_binary '\0','2019-10-05 23:52:33',0,NULL,24.6,2),(11,_binary '\0','2019-10-05 23:48:43',0,NULL,24.6,2),(10,_binary '\0','2019-10-05 23:41:32',0,NULL,40,2),(9,_binary '\0','2019-10-05 23:35:42',0,NULL,25,2),(8,_binary '\0','2019-10-05 23:33:56',0,NULL,25,2),(15,_binary '\0','2019-10-06 00:12:34',0,NULL,30,2),(16,_binary '\0','2019-10-06 00:13:21',0,NULL,5,2),(17,_binary '\0','2019-10-06 00:14:25',0,NULL,5,2),(18,_binary '\0','2019-10-06 00:15:19',0,NULL,5,2),(19,_binary '\0','2019-10-06 00:16:30',0,NULL,15,2),(20,_binary '\0','2019-10-06 00:44:28',0,NULL,30,2),(21,_binary '\0','2019-10-06 00:49:56',0,NULL,30,2);
+INSERT INTO `chec` VALUES (14,0,'2019-10-06 00:01:02',0,NULL,10,2),(13,0,'2019-10-05 23:59:02',0,NULL,5,2),(12,1,'2019-10-05 23:52:33',0,NULL,0,2),(10,0,'2019-10-05 23:41:32',0,NULL,40,2),(9,0,'2019-10-05 23:35:42',0,NULL,25,2),(8,0,'2019-10-05 23:33:56',0,NULL,25,2),(15,0,'2019-10-06 00:12:34',0,NULL,30,2),(16,0,'2019-10-06 00:13:21',0,NULL,5,2),(17,0,'2019-10-06 00:14:25',0,NULL,5,2),(18,0,'2019-10-06 00:15:19',0,NULL,5,2),(19,0,'2019-10-06 00:16:30',0,NULL,15,2),(20,0,'2019-10-06 00:44:28',0,NULL,30,2),(21,0,'2019-10-06 00:49:56',0,NULL,30,2);
 /*!40000 ALTER TABLE `chec` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,7 +56,7 @@ DROP TABLE IF EXISTS `checkspec`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `checkspec` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `canceled` bit(1) NOT NULL,
+  `canceled` tinyint(1) NOT NULL DEFAULT '0',
   `nds` int(11) DEFAULT NULL,
   `ndstotal` double NOT NULL,
   `price` double NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE `checkspec` (
 
 LOCK TABLES `checkspec` WRITE;
 /*!40000 ALTER TABLE `checkspec` DISABLE KEYS */;
-INSERT INTO `checkspec` VALUES (12,_binary '\0',20,2,5,2,10,14,6),(11,_binary '\0',20,3.92,9.8,2,19.6,12,7),(10,_binary '\0',20,1,5,1,5,12,6),(9,_binary '\0',20,3,5,3,15,10,6),(8,_binary '\0',20,2,5,2,10,9,6),(7,_binary '\0',20,3,5,3,15,9,6),(13,_binary '\0',20,1,5,1,5,15,6),(14,_binary '\0',20,2,5,2,10,15,6),(15,_binary '\0',20,3,5,3,15,15,6),(16,_binary '\0',20,1,5,1,5,16,6),(17,_binary '\0',20,1,5,1,5,17,6),(18,_binary '\0',20,1,5,1,5,18,6),(19,_binary '\0',20,1,5,1,5,19,6),(20,_binary '\0',20,2,5,2,10,19,6),(21,_binary '\0',20,1,5,1,5,20,6),(22,_binary '\0',20,2,5,2,10,20,6),(23,_binary '\0',20,3,5,3,15,20,6),(24,_binary '\0',20,1,5,1,5,21,6),(25,_binary '\0',20,2,5,2,10,21,6),(26,_binary '\0',20,3,5,3,15,21,6);
+INSERT INTO `checkspec` VALUES (12,0,20,2,5,2,10,14,6),(11,1,20,3.92,9.8,2,19.6,12,7),(10,1,20,1,5,1,5,12,6),(9,0,20,3,5,3,15,10,6),(8,0,20,2,5,2,10,9,6),(7,0,20,3,5,3,15,9,6),(13,0,20,1,5,1,5,15,6),(14,0,20,2,5,2,10,15,6),(15,0,20,3,5,3,15,15,6),(16,0,20,1,5,1,5,16,6),(17,0,20,1,5,1,5,17,6),(18,0,20,1,5,1,5,18,6),(19,0,20,1,5,1,5,19,6),(20,0,20,2,5,2,10,19,6),(21,0,20,1,5,1,5,20,6),(22,0,20,2,5,2,10,20,6),(23,0,20,3,5,3,15,20,6),(24,0,20,1,5,1,5,21,6),(25,0,20,2,5,2,10,21,6),(26,0,20,3,5,3,15,21,6);
 /*!40000 ALTER TABLE `checkspec` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,7 +147,7 @@ CREATE TABLE `user` (
   `id_user_type` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FKm3y953fsjasj6ev13yabo5skm` (`id_user_type`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -194,4 +194,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-06  4:24:53
+-- Dump completed on 2019-10-07  4:09:15

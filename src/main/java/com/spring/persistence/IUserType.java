@@ -11,5 +11,7 @@ public interface IUserType {
 
     Optional<UserType> findById(Long id);
     
+    Optional<UserType> findByType(String type);
+    
     UserType save(UserType user);
 }
