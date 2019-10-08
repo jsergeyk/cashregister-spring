@@ -13,12 +13,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.persistence.entity.*;
 import com.spring.service.CheckService;
+import com.spring.service.Report;
+import com.spring.service.ReportService;
 
 @Controller
 @AllArgsConstructor
 public class CancelController {
 	
 	private final CheckService checkService;
+	private final ReportService reportService;
 	  
     @GetMapping("/cancel")
     public String cancelView() {
@@ -64,5 +67,18 @@ public class CancelController {
 		Chec check = (Chec)session.getAttribute("check");
 		checkService.cancelCheckSpec(check);
     	return "/cancel";
+    }
+    
+    /**
+     * Сформировать Х-отчет 
+     * @param session сессия
+     * @return
+     */
+    @PostMapping(value = "/cancel", params = "btnXReport")
+    public ModelAndView printXReport(HttpSession session) {
+		Report xReport = reportService.getDataXReport();
+		session.setAttribute("xReport", xReport);
+		session.setAttribute("zReport", null);
+    	return new ModelAndView("redirect:/report");
     }
 }

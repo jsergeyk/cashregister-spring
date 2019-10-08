@@ -48,6 +48,7 @@ public class CheckService {
 			spec.setTotal(BigDecimal.valueOf(quant).multiply(BigDecimal.valueOf(spec.getPrice())).doubleValue());
 			spec.setNds(nds != null ? nds : 0);
 			spec.setNdstotal(BigDecimal.valueOf(spec.getTotal()).multiply(BigDecimal.valueOf(spec.getNds())).divide(new BigDecimal(100)).doubleValue());
+			spec.setCanceled(0);
 			return spec;
 		}
 		return null;
@@ -65,7 +66,8 @@ public class CheckService {
 		check.setCreator(user);		
 		double total = checkspecs.stream().mapToDouble(o -> o.getTotal()).sum();
 		check.setTotal(total);
-		check.setCheckspecCollection(checkspecs);		
+		check.setCheckspecCollection(checkspecs);
+		check.setCanceled(0);
 		checkspecs.stream().forEach(o -> {
 			o.setCheck(check);
 			Goods goods = o.getGoods();
@@ -74,7 +76,8 @@ public class CheckService {
 			}
 		});
 		checDAO.save(check);
-		checkspecDAO.saveAll(checkspecs);
+		//checkspecDAO.saveAll(checkspecs);
+		throw new RuntimeException();
 	}
 
 	/**

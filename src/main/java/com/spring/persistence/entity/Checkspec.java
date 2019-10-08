@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Admin
+ * @author SergeyK
  */
 @Entity
 @Table(name = "checkspec")

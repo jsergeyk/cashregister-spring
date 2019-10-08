@@ -10,7 +10,7 @@ public interface UserTypeRepository extends JpaRepository<UserType, Long> {
 	/**
 	 * Найти тип пользователя
 	 * @param type тип пользователя
-	 * @return UserType
+	 * @return userType 
 	 */
 	Optional<UserType> findByType(String type);
 }

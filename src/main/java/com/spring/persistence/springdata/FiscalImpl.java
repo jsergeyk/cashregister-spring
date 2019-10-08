@@ -3,6 +3,7 @@ package com.spring.persistence.springdata;
 import com.spring.persistence.IFiscal;
 import com.spring.persistence.entity.Fiscal;
 import com.spring.persistence.repositories.FiscalRepository;
+
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -30,5 +31,10 @@ public class FiscalImpl implements IFiscal {
     @Override
     public Fiscal save(Fiscal fiscal) {
         return fiscalRepository.save(fiscal);
+    }
+    
+    @Override
+    public List<Object[]> createXReport() {
+        return fiscalRepository.createXReport();
     }
 }

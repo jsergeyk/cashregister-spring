@@ -12,4 +12,9 @@ public interface IFiscal {
     Optional<Fiscal> findById(Long id);
 
     Fiscal save(Fiscal fiscal);
+
+	/**
+	 * @return
+	 */
+    List<Object[]> createXReport();
 }

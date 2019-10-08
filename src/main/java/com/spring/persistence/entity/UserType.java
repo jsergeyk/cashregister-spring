@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Admin
+ * @author SergeyK
  */
 @Entity
 @Table(name = "user_type")
