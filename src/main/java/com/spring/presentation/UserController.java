@@ -43,7 +43,7 @@ public class UserController {
                              Model model) {
         //User user = userService.findByLoginAndPassword(email,  password);
     	User user = userService.findByLogin(email);
-        if (user != null && user.getPassword().equals(DigestUtils.sha256Hex(password))) {
+        if (user != null && user.getPassword().equals(DigestUtils.sha256Hex(password))) {        	
         	session.setAttribute("user", user);
         	session.setAttribute("userNotExists", null);
         	log.info("Авторизация пользователя " + user.getName());
