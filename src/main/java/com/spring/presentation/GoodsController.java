@@ -61,8 +61,7 @@ public class GoodsController {
     public ModelAndView updateGoods(Model model, @PathVariable Integer code,
     		@RequestParam("changequant") Double changequant, @RequestParam("changeprice") Double changeprice,  
     		@RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
-		goodsService.changeGoods(code, changequant, changeprice);
-		
+		goodsService.changeGoods(code, changequant, changeprice);		
         addPagination(model, page, size);
         return new ModelAndView("redirect:/goods");
     }
