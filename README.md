@@ -11,4 +11,4 @@ _____
 
 Запустить проект из каталога проекта: mvn spring-boot:run
 
-Скрипт БД: src/main/resources/create_db_spring.sql
+Скрипт БД: src/main/resources/create_db_spring.sql (пользователи: a1@gmail.com, пароль 1; a2@gmail.com, пароль 2; a3@gmail.com, пароль 3)
