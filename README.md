@@ -8,6 +8,7 @@
 
 _____
 Собрать проект с запуском тестов: mvn package
+
 Запустить проект из каталога проекта: mvn spring-boot:run
 
 Скрипт БД: src/main/resources/create_db_spring.sql
