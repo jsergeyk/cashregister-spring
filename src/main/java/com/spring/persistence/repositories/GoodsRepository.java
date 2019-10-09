@@ -25,6 +25,7 @@ public interface GoodsRepository extends JpaRepository<Goods, Long> {
 	Optional<Goods> findByName(String name);
 
 	/**
+	 * Уменьшить количество товара 
 	 * @param id id товара
 	 * @param quant количество товара, на которое уменьшается
 	 * @return количество обработанных записей

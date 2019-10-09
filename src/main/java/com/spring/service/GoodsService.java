@@ -22,7 +22,11 @@ public class GoodsService {
     public Optional<Goods> findByCode(int code) {
         return goodsDAO.findByCode(code);
     }
-
+   
+    public Optional<Goods> findByName(String name) {
+        return goodsDAO.findByName(name);
+    }
+    
     public Optional<Goods> findById(Long id) {
         return goodsDAO.findById(id);
     }

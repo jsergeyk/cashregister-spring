@@ -11,28 +11,35 @@ import com.spring.persistence.entity.Goods;
 public interface IGoods {
 
     List<Goods> findAllGoods();
-    Optional<Goods> findByCode(int code);
-    Optional<Goods> findById(Long id);
-	/**
-	 * @param name
-	 * @return
-	 */
-	Optional<Goods> findByName(String name);
+	
     Goods save(Goods goods);
     
-	/**
-	 * @return
-	 */
 	List<Goods> findAll();
 	
-	/**
-	 * @param p
-	 * @return
-	 */
 	Page<Goods> findAll(Pageable p);
+	
+    Optional<Goods> findById(Long id);
+
 	/**
-	 * @param id
-	 * @param quant
+	 * Найти товар по коду товара
+	 * @param name код товара
+	 * @return товар
+	 */
+    Optional<Goods> findByCode(int code);
+    
+	/**
+	 * Найти товар по наименованию
+	 * @param name наименование товара
+	 * @return товар
+	 */
+	Optional<Goods> findByName(String name);
+
+	
+	/**
+	 * Уменьшить количество товара 
+	 * @param id id товара
+	 * @param quant количество товара, на которое уменьшается
+	 * @return количество обработанных записей
 	 */
 	Integer reduceQuant(Long id, double quant);
 }

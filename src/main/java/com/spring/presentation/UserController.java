@@ -60,14 +60,4 @@ public class UserController {
         model.addAttribute("user", user);
         return new ModelAndView("redirect:/");
     }   
-    
-  /*    
-    @Bean
-    public ITemplateResolver templateResolver() {
-        SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
-        resolver.setApplicationContext(applicationContext);
-        resolver.setPrefix("/templates/");
-        resolver.setTemplateMode(TemplateMode.HTML);
-        return resolver;
-    }*/
 }

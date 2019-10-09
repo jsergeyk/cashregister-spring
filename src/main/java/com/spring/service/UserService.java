@@ -30,8 +30,8 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public User findById(Long id) {
-        return userDAO.findById(id).orElseThrow(() -> new RuntimeException("Wrong id"));
+    public Optional<User> findById(Long id) {
+        return userDAO.findById(id);
     }
 
 	/**
