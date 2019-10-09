@@ -5,6 +5,8 @@ import com.spring.persistence.IUserType;
 import com.spring.persistence.entity.User;
 import com.spring.persistence.entity.UserType;
 import lombok.AllArgsConstructor;
+
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +24,11 @@ public class UserService {
     @Transactional(readOnly = true)
     public User findByLoginAndPassword(String login, String password) {
         return userDAO.findByLoginAndPassword(login, password);
+    }
+    
+    @Transactional(readOnly = true)
+    public User findByLogin(String login) {
+        return userDAO.findByLogin(login);
     }
     
     @Transactional(readOnly = true)
@@ -55,6 +62,7 @@ public class UserService {
 		if (userDAO.findByLogin(user.getLogin()) == null) {
 			Optional<UserType> type = userTypeDAO.findByType("cashier");
 			if (type.isPresent()) {
+				user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
 				user.setUserType(type.get());
 				return userDAO.save(user);
 			}

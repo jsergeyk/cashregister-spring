@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,8 +41,9 @@ public class UserController {
                              @RequestParam("password") String password,
                              HttpSession session,
                              Model model) {
-        User user = userService.findByLoginAndPassword(email,  password);
-        if (user != null) {
+        //User user = userService.findByLoginAndPassword(email,  password);
+    	User user = userService.findByLogin(email);
+        if (user != null && user.getPassword().equals(DigestUtils.sha256Hex(password))) {
         	session.setAttribute("user", user);
         	session.setAttribute("userNotExists", null);
         	log.info("Авторизация пользователя " + user.getName());

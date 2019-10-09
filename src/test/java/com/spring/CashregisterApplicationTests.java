@@ -2,10 +2,14 @@ package com.spring;
 
 import java.math.BigDecimal;
 import java.util.*;
+
+import javax.servlet.http.HttpSession;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.spring.persistence.entity.*;
 import com.spring.persistence.springdata.*;
+import com.spring.presentation.UserController;
 import com.spring.service.*;
 
 //@RunWith(MockitoJUnitRunner.class)
@@ -47,6 +52,8 @@ public class CashregisterApplicationTests {
 
     	User user = new User(1l, "goods_spec", "1", "Сергей");
     	user.setUserType(new UserType(1l, "goods_spec"));
+    	user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
+    	
     	when(userImpl.findByLoginAndPassword("a1@gmail.com", "1")).thenReturn(user);
     	assertEquals(userService.findByLoginAndPassword("a1@gmail.com", "1"), user);
     	
@@ -59,6 +66,12 @@ public class CashregisterApplicationTests {
     	assertThat(users, notNullValue());
     	assertThat(users, hasSize(1));
     	assertThat(userService.findByUserType(user.getUserType()), is(users));
+    	
+    	when(userImpl.findByLogin("a1@gmail.com")).thenReturn(user);
+    	assertEquals(userService.findByLogin("a1@gmail.com"), user);
+    	HttpSession session = mock(HttpSession.class);
+    	new UserController(userService).postSignIn("a1@gmail.com", "1", session, null);
+    	verify(session, times(1)).setAttribute("user", user);
     }
     
     @Test

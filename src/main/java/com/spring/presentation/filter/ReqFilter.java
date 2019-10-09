@@ -22,7 +22,7 @@ public class ReqFilter implements Filter {
 		String path = ((HttpServletRequest)request).getServletPath();
  		if (session == null || session.getAttribute("user") == null) {
  			if (path.equals("") || path.equals("/") || path.equals("/login") 
- 					|| path.equals("/logout") || path.equals("/registration") || path.startsWith("/css") || path.startsWith("/css")) {
+ 					|| path.equals("/logout") || path.equals("/registration") || path.startsWith("/css") || path.startsWith("/js")) {
  				chain.doFilter(request, response);
  			} else {
  				((HttpServletResponse)response).sendRedirect("/");
