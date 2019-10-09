@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 //@RequestMapping("/")
@@ -57,13 +58,13 @@ public class GoodsController {
     }
     
 	@PostMapping("/goods/edit/{code}")
-    public String updateGoods(Model model, @PathVariable Integer code,
+    public ModelAndView updateGoods(Model model, @PathVariable Integer code,
     		@RequestParam("changequant") Double changequant, @RequestParam("changeprice") Double changeprice,  
     		@RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
 		goodsService.changeGoods(code, changequant, changeprice);
 		
         addPagination(model, page, size);
-        return "/goods";
+        return new ModelAndView("redirect:/goods");
     }
     
     /**
