@@ -77,7 +77,7 @@ public class CheckService {
 		});
 		checDAO.save(check);
 		//checkspecDAO.saveAll(checkspecs);
-		throw new RuntimeException();
+		//throw new RuntimeException();
 	}
 
 	/**

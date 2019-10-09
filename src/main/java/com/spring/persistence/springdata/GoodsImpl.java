@@ -7,7 +7,6 @@ import com.spring.persistence.repositories.GoodsRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -57,7 +56,6 @@ public class GoodsImpl implements IGoods {
 	}
 
 	@Override
-	@Transactional
 	public Integer reduceQuant(Long id, double quant) {
 		return goodsRepository.reduceQuant(id, quant);		
 	}

@@ -64,7 +64,8 @@ public class UserService {
 			if (type.isPresent()) {
 				user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
 				user.setUserType(type.get());
-				return userDAO.save(user);
+				User id = userDAO.save(user);
+				return id;
 			}
 		}
 		return null;
