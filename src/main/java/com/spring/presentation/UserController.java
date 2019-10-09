@@ -28,7 +28,7 @@ public class UserController {
     }
     
     @GetMapping("/logout")
-    public ModelAndView logout(HttpServletRequest request/*, HttpServletResponse response*/) {
+    public ModelAndView logout(HttpServletRequest request) {
     	HttpSession session = request.getSession(false);
         if (session != null) {
         	session.invalidate();
