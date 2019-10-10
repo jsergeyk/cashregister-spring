@@ -81,4 +81,17 @@ public class CancelController {
 		session.setAttribute("zReport", null);
     	return new ModelAndView("redirect:/report");
     }
+    
+    /**
+     * Сформировать Z-отчет 
+     * @param session сессия
+     * @return
+     */
+    @PostMapping(value = "/cancel", params = "btnZReport")
+    public ModelAndView printZReport(HttpSession session) {
+		Report zReport = reportService.getDataZReport();
+		session.setAttribute("zReport", zReport);
+		session.setAttribute("xReport", null);
+    	return new ModelAndView("redirect:/report");
+    }
 }

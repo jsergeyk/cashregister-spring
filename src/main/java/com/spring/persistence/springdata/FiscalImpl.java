@@ -37,4 +37,9 @@ public class FiscalImpl implements IFiscal {
     public List<Object[]> createXReport() {
         return fiscalRepository.createXReport();
     }
+    
+    @Override
+    public List<Object[]> createZReport() {
+        return fiscalRepository.createZReport();
+    }
 }

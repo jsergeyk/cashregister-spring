@@ -14,7 +14,14 @@ public interface IFiscal {
     Fiscal save(Fiscal fiscal);
 
 	/**
+	 * Сформировать Х-отчет
 	 * @return
 	 */
     List<Object[]> createXReport();
+    
+	/**
+	 * Сформировать Z-отчет
+	 * @return
+	 */
+    List<Object[]> createZReport();
 }

@@ -5,6 +5,7 @@ import com.spring.persistence.entity.Chec;
 import com.spring.persistence.repositories.ChecRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,4 +32,9 @@ public class ChecImpl implements IChec {
     public Chec save(Chec chec) {
         return checRepository.save(chec);
     }
+
+	@Override
+	public void register(Date date) {
+		checRepository.register(date);		
+	}
 }
